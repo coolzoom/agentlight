@@ -8,7 +8,6 @@
 
   串口协议：
   以 115200 波特率发送一行字符串，支持：
-  identify / id   -> 返回设备 ID（用于主机自动识别）
   idle
   thinking
   ai
@@ -59,12 +58,10 @@ const unsigned long AI_CHASE_INTERVAL_MS = 240;
 const unsigned long BUSY_BLINK_INTERVAL_MS = 550;
 const unsigned long SUCCESS_HOLD_MS = 5000;
 const unsigned long ERROR_BLINK_INTERVAL_MS = 130;
-const unsigned long WAIT_BLINK_INTERVAL_MS = 550;
 
 const char *BLE_DEVICE_NAME = "AgentCore-Light";
 const char *BLE_SERVICE_UUID = "12345678-1234-5678-1234-56789abcdef0";
 const char *BLE_CHARACTERISTIC_UUID = "12345678-1234-5678-1234-56789abcdef1";
-const char *DEVICE_ID = "agent-signal-light-v1";
 
 enum LightState {
   STATE_IDLE,
@@ -104,14 +101,14 @@ uint8_t brightnessToDuty(uint8_t brightness) {
 #endif
 }
 
-void writeLedPin(uint8_t pin, uint8_t brightness) {
-  analogWrite(pin, brightnessToDuty(brightness));
+void writeLed(uint8_t channel, uint8_t brightness) {
+  ledcWriteChannel(channel, brightnessToDuty(brightness));
 }
 
 void setLightLevels(uint8_t red, uint8_t yellow, uint8_t green) {
-  writeLedPin(RED_LED_PIN, red);
-  writeLedPin(YELLOW_LED_PIN, yellow);
-  writeLedPin(GREEN_LED_PIN, green);
+  writeLed(RED_LED_CHANNEL, red);
+  writeLed(YELLOW_LED_CHANNEL, yellow);
+  writeLed(GREEN_LED_CHANNEL, green);
 }
 
 void setLight(bool red, bool yellow, bool green) {
@@ -130,14 +127,11 @@ void resetEffectState() {
   breathStep = 2;
 }
 
-void updateEffect();
-
 void enterState(LightState newState) {
   currentState = newState;
   stateStartMs = millis();
   resetEffectState();
   setLight(false, false, false);
-  updateEffect();
 }
 
 bool setStatus(String status) {
@@ -234,8 +228,7 @@ class LightBleServerCallbacks : public BLEServerCallbacks {
 
 class LightBleCharacteristicCallbacks : public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic *characteristic) override {
-    std::string raw = characteristic->getValue();
-    String payload = String(raw.c_str());
+    String payload = characteristic->getValue();
     if (payload.length() == 0) {
       return;
     }
@@ -293,19 +286,28 @@ bool effectFrameDue(unsigned long intervalMs) {
 }
 
 void showThinkingChaseFrame() {
-  switch (chaseIndex % 3) {
+  switch (chaseIndex) {
     case 0:
       setLightLevels(LED_PWM_LIMIT, 0, 0);
       break;
     case 1:
+      setLightLevels(LED_PWM_LIMIT, LED_PWM_LIMIT, 0);
+      break;
+    case 2:
       setLightLevels(0, LED_PWM_LIMIT, 0);
       break;
-    default:
+    case 3:
+      setLightLevels(0, LED_PWM_LIMIT, LED_PWM_LIMIT);
+      break;
+    case 4:
       setLightLevels(0, 0, LED_PWM_LIMIT);
+      break;
+    default:
+      setLightLevels(LED_PWM_LIMIT, 0, LED_PWM_LIMIT);
       break;
   }
 
-  chaseIndex = (chaseIndex + 1) % 3;
+  chaseIndex = (chaseIndex + 1) % 6;
 }
 
 void showAiChaseFrame() {
@@ -386,10 +388,7 @@ void updateEffect() {
     case STATE_CONFIRM:
     case STATE_WAITING:
     case STATE_WAIT:
-      if (effectFrameDue(WAIT_BLINK_INTERVAL_MS)) {
-        blinkOn = !blinkOn;
-        setLightLevels(0, blinkOn ? LED_PWM_LIMIT : 0, 0);
-      }
+      setLightLevels(0, LED_PWM_LIMIT, 0);
       break;
 
     case STATE_ERROR:
@@ -410,12 +409,6 @@ void handleCommand(String command) {
   command.toLowerCase();
 
   if (command.length() == 0) {
-    return;
-  }
-
-  if (command == "identify" || command == "id") {
-    Serial.print("ID: ");
-    Serial.println(DEVICE_ID);
     return;
   }
 
@@ -446,22 +439,18 @@ void readSerialCommands() {
 
 void setup() {
   Serial.begin(115200);
-  unsigned long serialWaitStart = millis();
-  while (!Serial && millis() - serialWaitStart < 3000) {
-    delay(10);
-  }
-
   serialBuffer.reserve(32);
 
+  ledcAttachChannel(RED_LED_PIN, LED_PWM_FREQ, LED_PWM_RESOLUTION, RED_LED_CHANNEL);
+  ledcAttachChannel(YELLOW_LED_PIN, LED_PWM_FREQ, LED_PWM_RESOLUTION, YELLOW_LED_CHANNEL);
+  ledcAttachChannel(GREEN_LED_PIN, LED_PWM_FREQ, LED_PWM_RESOLUTION, GREEN_LED_CHANNEL);
   setLightLevels(0, 0, 0);
   setupBle();
 
   enterState(STATE_IDLE);
 
-  Serial.print("READY ID=");
-  Serial.println(DEVICE_ID);
   Serial.println("ESP32-C3 traffic light ready.");
-  Serial.println("Commands: identify, idle, thinking, ai, success, busy, wait_confirm, confirm, waiting, wait, error, off");
+  Serial.println("Commands: idle, thinking, ai, success, busy, wait_confirm, confirm, waiting, wait, error, off");
 }
 
 void loop() {

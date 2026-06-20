@@ -1016,34 +1016,6 @@ function closeDrawer() {
 
 document.querySelectorAll("[data-event]").forEach((button) => {
   button.addEventListener("click", async () => {
-    followMode = "test";
-    selectedFollowSessionId = "";
-    updateFollowModeButtons();
-
-    const eventMap = {
-      G: "SessionStart",
-      Y: "UserPromptSubmit",
-      W: "PermissionRequest",
-      R: "StopFailure",
-      O: "SessionEnd"
-    };
-    const eventName = eventMap[button.dataset.event] || "off";
-    const effectId = button.dataset.effect || "off";
-    if (latestPayload) {
-      renderStatus(
-        {
-          ...latestPayload,
-          agent: "manual",
-          winner_event: eventName,
-          effect_id: effectId,
-          effect_name: effectId,
-          display_state: deriveTheme({ winner_event: eventName, effect_id: effectId }),
-          controlling_session_id: "__manual__"
-        },
-        { keepHistory: true }
-      );
-    }
-
     await fetch("/event", { method: "POST", body: button.dataset.event });
   });
 });

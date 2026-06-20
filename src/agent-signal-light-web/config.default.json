@@ -6,7 +6,7 @@
       "name": "Idle Green",
       "builtin": true,
       "frames": [
-        { "leds": ["off", "off", "breathe"], "ms": null }
+        { "leds": ["on", "off", "off"], "ms": null }
       ]
     },
     {
@@ -14,9 +14,7 @@
       "name": "Working",
       "builtin": true,
       "frames": [
-        { "leds": ["on", "off", "off"], "ms": 110 },
-        { "leds": ["off", "on", "off"], "ms": 110 },
-        { "leds": ["off", "off", "on"], "ms": 110 }
+        { "leds": ["off", "breathe", "off"], "ms": null }
       ]
     },
     {
@@ -36,11 +34,11 @@
       "name": "Error",
       "builtin": true,
       "frames": [
-        { "leds": ["on", "off", "off"],  "ms": 1000 },
+        { "leds": ["off", "off", "on"],  "ms": 1000 },
         { "leds": ["off", "off", "off"], "ms": 1000 },
-        { "leds": ["on", "off", "off"],  "ms": 1000 },
+        { "leds": ["off", "off", "on"],  "ms": 1000 },
         { "leds": ["off", "off", "off"], "ms": 1000 },
-        { "leds": ["on", "off", "off"],  "ms": 7000 }
+        { "leds": ["off", "off", "on"],  "ms": 7000 }
       ]
     },
     {

@@ -1,8 +1,11 @@
 import sys
+import time
 
 import serial
+from serial.tools import list_ports
 
-from serial_device import DEFAULT_BAUD_RATE, detect_port, expected_device_id, open_serial
+
+BAUD_RATE = 115200
 
 MENU_ITEMS = {
     "1": ("IDLE", "idle"),
@@ -17,6 +20,57 @@ MENU_ITEMS = {
 }
 
 
+def score_port(port):
+    text = " ".join(
+        [
+            port.device or "",
+            port.description or "",
+            port.manufacturer or "",
+            port.hwid or "",
+        ]
+    ).lower()
+
+    score = 0
+    if "esp32" in text:
+        score += 100
+    if "usb" in text:
+        score += 20
+    if "jtag" in text or "serial" in text:
+        score += 10
+    if "bluetooth" in text or "bth" in text:
+        score -= 100
+    return score
+
+
+def detect_port():
+    ports = list(list_ports.comports())
+    if not ports:
+        return None
+
+    ranked = sorted(ports, key=score_port, reverse=True)
+    if score_port(ranked[0]) > 0:
+        return ranked[0].device
+
+    return ranked[0].device
+
+
+def open_serial(port):
+    ser = serial.Serial(port=port, baudrate=BAUD_RATE, timeout=0.3, write_timeout=1)
+    ser.dtr = False
+    ser.rts = False
+    time.sleep(0.5)
+
+    # 清掉上电或复位时可能残留的启动信息，避免影响交互显示。
+    try:
+        waiting = ser.in_waiting
+        if waiting:
+            ser.read(waiting)
+    except serial.SerialException:
+        pass
+
+    return ser
+
+
 def print_menu():
     print()
     print("ESP32-C3 AI Agent 状态灯控制")
@@ -26,19 +80,18 @@ def print_menu():
 
 
 def main():
-    device_id = expected_device_id()
-    port = detect_port(DEFAULT_BAUD_RATE, device_id)
+    port = detect_port()
     if not port:
-        print(f"未检测到设备 ID：{device_id}")
+        print("未检测到可用串口。")
         sys.exit(1)
 
     try:
-        ser = open_serial(port, DEFAULT_BAUD_RATE, settle_seconds=0.5)
+        ser = open_serial(port)
     except Exception as exc:
         print(f"打开串口失败：{port} - {exc}")
         sys.exit(1)
 
-    print(f"已连接 {port}（{device_id}），波特率 {DEFAULT_BAUD_RATE}")
+    print(f"已连接 {port}，波特率 {BAUD_RATE}")
 
     try:
         while True:
