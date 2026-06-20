@@ -117,7 +117,47 @@ is_port_listening() {
 }
 
 is_bridge_running() {
-  pgrep -f "[p]ython.*codex_status_bridge.py" >/dev/null 2>&1
+  pgrep -f "[p]ython.*${BRIDGE_SCRIPT}" >/dev/null 2>&1
+}
+
+web_server_pids() {
+  lsof -tiTCP:"$PORT" -sTCP:LISTEN 2>/dev/null || true
+}
+
+bridge_pids() {
+  pgrep -f "[p]ython.*${BRIDGE_SCRIPT}" 2>/dev/null || true
+}
+
+stop_pids() {
+  local label="$1"
+  local get_pids_fn="$2"
+  local pids
+  pids="$($get_pids_fn)"
+
+  if [[ -z "$pids" ]]; then
+    echo "[OK] $label is not running."
+    return 0
+  fi
+
+  echo "[Stop] $label (PID: ${pids//$'\n'/ })"
+  # shellcheck disable=SC2086
+  kill $pids 2>/dev/null || true
+  sleep 0.3
+
+  pids="$($get_pids_fn)"
+  if [[ -n "$pids" ]]; then
+    echo "[Stop] force $label (PID: ${pids//$'\n'/ })"
+    # shellcheck disable=SC2086
+    kill -9 $pids 2>/dev/null || true
+  fi
+}
+
+stop_web_server() {
+  stop_pids "web dashboard" web_server_pids
+}
+
+stop_serial_bridge() {
+  stop_pids "serial bridge" bridge_pids
 }
 
 start_web_server() {
@@ -155,6 +195,29 @@ wait_for_web() {
   return 1
 }
 
+run_stop() {
+  write_step "AI Status Light - Stop Full System"
+
+  stop_web_server
+  stop_serial_bridge
+
+  if is_port_listening; then
+    echo "[Warn] Port $PORT is still in use. Check with: lsof -iTCP:$PORT -sTCP:LISTEN"
+  else
+    echo "[OK] Port $PORT is free."
+  fi
+
+  if is_bridge_running; then
+    echo "[Warn] Serial bridge is still running."
+  else
+    echo "[OK] Serial bridge is stopped."
+  fi
+
+  echo ""
+  echo "[OK] System stopped."
+  echo ""
+}
+
 run_start() {
   write_step "AI Status Light - Start Full System"
 
@@ -189,6 +252,8 @@ Options:
   (no args)        Install dependencies, configure hooks, then start the system
   --install-only   Install and configure only
   --start-only     Start web dashboard and serial bridge only
+  --stop           Stop web dashboard and serial bridge
+  -k, --kill       Same as --stop
   -h, --help       Show this help
 
 Manual test:
@@ -207,6 +272,9 @@ main() {
       --start-only|-s)
         mode="start"
         ;;
+      --stop|-k|--kill)
+        mode="stop"
+        ;;
       -h|--help)
         print_usage
         exit 0
@@ -224,6 +292,9 @@ main() {
       ;;
     start)
       run_start
+      ;;
+    stop)
+      run_stop
       ;;
     all)
       run_install
