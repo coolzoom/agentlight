@@ -1,0 +1,142 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./agent-signal-light-web/hook.sh codex",
+            "commandWindows": "./agent-signal-light-web/hook.sh codex",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./agent-signal-light-web/hook.sh codex",
+            "commandWindows": "./agent-signal-light-web/hook.sh codex",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./agent-signal-light-web/hook.sh codex",
+            "commandWindows": "./agent-signal-light-web/hook.sh codex",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./agent-signal-light-web/hook.sh codex",
+            "commandWindows": "./agent-signal-light-web/hook.sh codex",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./agent-signal-light-web/hook.sh codex",
+            "commandWindows": "./agent-signal-light-web/hook.sh codex",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "manual|auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./agent-signal-light-web/hook.sh codex",
+            "commandWindows": "./agent-signal-light-web/hook.sh codex",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "matcher": "manual|auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./agent-signal-light-web/hook.sh codex",
+            "commandWindows": "./agent-signal-light-web/hook.sh codex",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./agent-signal-light-web/hook.sh codex",
+            "commandWindows": "./agent-signal-light-web/hook.sh codex",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./agent-signal-light-web/hook.sh codex",
+            "commandWindows": "./agent-signal-light-web/hook.sh codex",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./agent-signal-light-web/hook.sh codex",
+            "commandWindows": "./agent-signal-light-web/hook.sh codex",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./agent-signal-light-web/hook.sh codex",
+            "commandWindows": "./agent-signal-light-web/hook.sh codex",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
