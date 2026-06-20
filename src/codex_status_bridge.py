@@ -7,59 +7,13 @@ import urllib.error
 import urllib.request
 
 import serial
-from serial.tools import list_ports
 
-
+from serial_device import DEFAULT_BAUD_RATE, detect_port, expected_device_id, open_serial
 DEFAULT_API_URL = "http://127.0.0.1:8787/api/status"
-DEFAULT_BAUD_RATE = 115200
 DEFAULT_INTERVAL = 0.5
 INSTANCE_LOCK_PORT = 37638
 SERIAL_RETRY_SECONDS = 2.0
 COMMAND_RESEND_SECONDS = 2.0
-
-
-def score_port(port):
-    text = " ".join(
-        [
-            port.device or "",
-            port.description or "",
-            port.manufacturer or "",
-            port.hwid or "",
-        ]
-    ).lower()
-
-    score = 0
-    if "esp32" in text:
-        score += 100
-    if "usb" in text:
-        score += 20
-    if "jtag" in text or "serial" in text:
-        score += 10
-    if "bluetooth" in text or "bth" in text:
-        score -= 100
-    return score
-
-
-def detect_port():
-    ports = list(list_ports.comports())
-    if not ports:
-        return None
-
-    ranked = sorted(ports, key=score_port, reverse=True)
-    return ranked[0].device
-
-
-def open_serial(port, baud_rate):
-    ser = serial.Serial(port=port, baudrate=baud_rate, timeout=0.3, write_timeout=1)
-    ser.dtr = False
-    ser.rts = False
-    time.sleep(1.5)
-    try:
-        if ser.in_waiting:
-            ser.read(ser.in_waiting)
-    except serial.SerialException:
-        pass
-    return ser
 
 
 def acquire_instance_lock():
@@ -156,6 +110,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Bridge Codex web status to ESP32 traffic light.")
     parser.add_argument("--api-url", default=DEFAULT_API_URL, help="Status API URL")
     parser.add_argument("--port", default="", help="Serial port, auto-detect when omitted")
+    parser.add_argument("--device-id", default="", help=f"Expected device ID (default: {expected_device_id()})")
     parser.add_argument("--baud", type=int, default=DEFAULT_BAUD_RATE, help="Serial baud rate")
     parser.add_argument("--interval", type=float, default=DEFAULT_INTERVAL, help="Polling interval in seconds")
     parser.add_argument("--once", action="store_true", help="Fetch and send only once")
@@ -170,12 +125,14 @@ def main():
         return 0
 
     print(f"正在监听 {args.api_url}")
+    target_device_id = args.device_id.strip() or expected_device_id()
+    print(f"目标设备 ID: {target_device_id}")
 
     try:
         while True:
-            port = args.port or detect_port()
+            port = args.port or detect_port(args.baud, target_device_id)
             if not port:
-                print("未检测到可用串口，稍后重试。")
+                print("未检测到匹配的设备 ID，稍后重试。")
                 if args.once:
                     return 1
                 time.sleep(SERIAL_RETRY_SECONDS)
@@ -190,7 +147,7 @@ def main():
                 time.sleep(SERIAL_RETRY_SECONDS)
                 continue
 
-            print(f"已连接 {port}，波特率 {args.baud}")
+            print(f"已连接 {port}（{target_device_id}），波特率 {args.baud}")
             try:
                 result = bridge_loop(ser, args.api_url, args.interval, args.once)
             finally:
