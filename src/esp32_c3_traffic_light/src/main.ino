@@ -45,7 +45,7 @@ const uint8_t LED_PWM_MAX = 255;
 const uint8_t LED_PWM_LIMIT = 140;       // 约 55% 占空比
 const uint8_t LED_PWM_SOFT = 84;         // 约 33% 占空比
 const uint8_t LED_PWM_TRAIL = 28;        // 柔和拖尾亮度
-const uint8_t LED_BREATH_MIN = 6;
+const uint8_t LED_BREATH_MIN = 40;
 
 const unsigned long IDLE_BREATH_STEP_MS = 14;
 const unsigned long THINKING_CHASE_INTERVAL_MS = 110;
@@ -59,6 +59,27 @@ const char *BLE_DEVICE_NAME = "AgentCore-Light";
 const char *BLE_SERVICE_UUID = "12345678-1234-5678-1234-56789abcdef0";
 const char *BLE_CHARACTERISTIC_UUID = "12345678-1234-5678-1234-56789abcdef1";
 const char *DEVICE_ID = "agent-signal-light-v1";
+
+// 128 点呼吸表：sin 相位 -pi/2 起始于最低亮度，首尾同为 15，循环无跳变
+const uint8_t BREATH_PERIOD = 128;
+const uint8_t BREATH_SINE[BREATH_PERIOD] = {
+   15,  15,  15,  16,  16,  17,  18,  19,
+   20,  21,  22,  24,  26,  27,  29,  31,
+   33,  36,  38,  40,  43,  45,  48,  51,
+   54,  56,  59,  62,  65,  68,  71,  74,
+   78,  81,  84,  87,  90,  93,  96,  99,
+  101, 104, 107, 110, 112, 115, 117, 119,
+  122, 124, 126, 128, 129, 131, 133, 134,
+  135, 136, 137, 138, 139, 139, 140, 140,
+  140, 140, 140, 139, 139, 138, 137, 136,
+  135, 134, 133, 131, 129, 128, 126, 124,
+  122, 119, 117, 115, 112, 110, 107, 104,
+  101,  99,  96,  93,  90,  87,  84,  81,
+   78,  74,  71,  68,  65,  62,  59,  56,
+   54,  51,  48,  45,  43,  40,  38,  36,
+   33,  31,  29,  27,  26,  24,  22,  21,
+   20,  19,  18,  17,  16,  16,  15,  15,
+};
 
 enum LightState {
   STATE_IDLE,
@@ -82,8 +103,23 @@ unsigned long stateStartMs = 0;
 unsigned long lastEffectFrameMs = 0;
 uint8_t chaseIndex = 0;
 bool blinkOn = false;
-int breathBrightness = LED_BREATH_MIN;
-int breathStep = 2;
+uint8_t breathIndex = 0;
+
+// 避免每帧重复 ledc_stop 干扰同 timer 上其他 LEDC 通道
+static int8_t lastPinBrightness[3] = {-1, -1, -1};
+
+int pinSlot(uint8_t pin) {
+  if (pin == RED_LED_PIN) return 0;
+  if (pin == YELLOW_LED_PIN) return 1;
+  if (pin == GREEN_LED_PIN) return 2;
+  return -1;
+}
+
+void clearLedPinCache() {
+  lastPinBrightness[0] = -1;
+  lastPinBrightness[1] = -1;
+  lastPinBrightness[2] = -1;
+}
 
 uint8_t brightnessToDuty(uint8_t brightness) {
   uint8_t limited = brightness;
@@ -120,11 +156,23 @@ void stopLedPwmOff(uint8_t pin) {
 }
 
 void writeLedPin(uint8_t pin, uint8_t brightness) {
+  int slot = pinSlot(pin);
+  int8_t prev = slot >= 0 ? lastPinBrightness[slot] : -1;
+
   if (brightness == 0) {
-    stopLedPwmOff(pin);
+    if (prev != 0) {
+      stopLedPwmOff(pin);
+      if (slot >= 0) {
+        lastPinBrightness[slot] = 0;
+      }
+    }
     return;
   }
+
   analogWrite(pin, brightnessToDuty(brightness));
+  if (slot >= 0) {
+    lastPinBrightness[slot] = (int8_t)brightness;
+  }
 }
 
 void setLightLevels(uint8_t red, uint8_t yellow, uint8_t green) {
@@ -145,8 +193,7 @@ void resetEffectState() {
   lastEffectFrameMs = 0;
   chaseIndex = 0;
   blinkOn = false;
-  breathBrightness = LED_BREATH_MIN;
-  breathStep = 2;
+  breathIndex = 0;
 }
 
 void updateEffect();
@@ -155,7 +202,14 @@ void enterState(LightState newState) {
   currentState = newState;
   stateStartMs = millis();
   resetEffectState();
-  setLight(false, false, false);
+  clearLedPinCache();
+  if (newState == STATE_IDLE) {
+    writeLedPin(RED_LED_PIN, 0);
+    writeLedPin(YELLOW_LED_PIN, 0);
+    writeLedPin(GREEN_LED_PIN, BREATH_SINE[0]);
+  } else {
+    setLight(false, false, false);
+  }
   updateEffect();
 }
 
@@ -359,16 +413,8 @@ void updateIdleBreathing() {
     return;
   }
 
-  breathBrightness += breathStep;
-  if (breathBrightness >= LED_PWM_LIMIT) {
-    breathBrightness = LED_PWM_LIMIT;
-    breathStep = -2;
-  } else if (breathBrightness <= LED_BREATH_MIN) {
-    breathBrightness = LED_BREATH_MIN;
-    breathStep = 2;
-  }
-
-  setLightLevels(0, 0, (uint8_t)breathBrightness);
+  breathIndex = (breathIndex + 1) % BREATH_PERIOD;
+  setLightLevels(0, 0, BREATH_SINE[breathIndex]);
 }
 
 void updateEffect() {
