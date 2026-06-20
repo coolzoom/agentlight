@@ -962,3 +962,4 @@
 [keep] wait_confirm event=PermissionRequest effect=wait_user
 串口桥已在运行，当前进程退出。
 串口桥已在运行，当前进程退出。
+串口桥已在运行，当前进程退出。
