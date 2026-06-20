@@ -31,6 +31,7 @@
 #include <BLEDevice.h>
 #include <BLEServer.h>
 #include <BLEUtils.h>
+#include <driver/ledc.h>
 
 // 如果你的灯板是高电平点亮，把这里改成 1。
 #define LED_ACTIVE_HIGH 0
@@ -101,7 +102,32 @@ uint8_t brightnessToDuty(uint8_t brightness) {
 #endif
 }
 
+uint32_t ledOffIdleLevel() {
+#if LED_ACTIVE_HIGH
+  return 0;
+#else
+  return 1;
+#endif
+}
+
+void stopLedPwmOff(uint8_t pin) {
+  int8_t channel = analogGetChannel(pin);
+  if (channel < 0) {
+    pinMode(pin, OUTPUT);
+    digitalWrite(pin, ledOffIdleLevel() ? HIGH : LOW);
+    return;
+  }
+
+  ledc_mode_t speedMode = (ledc_mode_t)(channel / 8);
+  ledc_channel_t ledcChannel = (ledc_channel_t)(channel % 8);
+  ledc_stop(speedMode, ledcChannel, ledOffIdleLevel());
+}
+
 void writeLedPin(uint8_t pin, uint8_t brightness) {
+  if (brightness == 0 && currentState == STATE_OFF) {
+    stopLedPwmOff(pin);
+    return;
+  }
   analogWrite(pin, brightnessToDuty(brightness));
 }
 
