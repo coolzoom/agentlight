@@ -118,6 +118,23 @@
       "PostCompact",
       "SubagentStart",
       "SubagentStop"
+    ],
+    "cursor": [
+      "StopFailure",
+      "PermissionRequest",
+      "Notification",
+      "Elicitation",
+      "PreToolUse:AskUserQuestion",
+      "Stop",
+      "SessionStart",
+      "PostToolUse:AskUserQuestion",
+      "UserPromptSubmit",
+      "PreToolUse",
+      "PostToolUse",
+      "PreCompact",
+      "PostCompact",
+      "SubagentStart",
+      "SubagentStop"
     ]
   }
 }

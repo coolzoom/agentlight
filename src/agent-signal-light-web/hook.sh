@@ -3,7 +3,7 @@ set -eu
 
 AGENT="${1:-unknown}"
 case "$AGENT" in
-  claude|codex) ;;
+  claude|codex|cursor) ;;
   *) AGENT="unknown" ;;
 esac
 

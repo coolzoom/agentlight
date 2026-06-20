@@ -69,6 +69,7 @@ const TEXT_MAP = {
   all: "自动",
   claude: "Claude",
   codex: "Codex",
+  cursor: "Cursor",
   manual: "手动模拟",
   none: "无",
   unknown: "未知",
@@ -156,7 +157,7 @@ if (bleClient) {
   };
 }
 
-const REAL_AGENT_SCOPES = new Set(["all", "codex", "claude"]);
+const REAL_AGENT_SCOPES = new Set(["all", "codex", "claude", "cursor"]);
 const CONNECTION_MODE_LABELS = {
   bluetooth: "蓝牙",
   serial: "串口",
@@ -731,7 +732,7 @@ function renderSessionList() {
 
   if (!sessions.length) {
     sessionList.className = "session-list empty";
-    sessionList.textContent = "暂无可用会话，请确认 Codex Hook 已连接并产生事件。";
+    sessionList.textContent = "暂无可用会话，请确认 Codex / Claude / Cursor Hook 已连接并产生事件。";
     return;
   }
 

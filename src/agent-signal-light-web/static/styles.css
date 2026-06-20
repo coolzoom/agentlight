@@ -1219,6 +1219,7 @@ time,
 
 .agent.claude { background: rgba(255, 191, 45, 0.14); }
 .agent.codex { background: rgba(51, 210, 255, 0.14); }
+.agent.cursor { background: rgba(124, 92, 255, 0.16); }
 .agent.manual { background: rgba(40, 240, 138, 0.14); }
 
 .control-card.idle .control-icon { color: var(--green); }

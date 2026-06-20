@@ -324,3 +324,37 @@
 [send] off          event=off effect=off
 [keep] off          event=off effect=off
 [keep] off          event=off effect=off
+正在监听 http://127.0.0.1:8787/api/status
+已连接 /dev/cu.usbmodem2101，波特率 115200
+[send] success      event=Stop effect=success
+[keep] success      event=Stop effect=success
+[keep] success      event=Stop effect=success
+[keep] success      event=Stop effect=success
+[send] success      event=Stop effect=success
+[keep] success      event=Stop effect=success
+[keep] success      event=Stop effect=success
+[keep] success      event=Stop effect=success
+[send] success      event=Stop effect=success
+正在监听 http://127.0.0.1:8787/api/status
+已连接 /dev/cu.usbmodem2101，波特率 115200
+[send] idle         event=SessionStart effect=idle_green
+[keep] idle         event=SessionStart effect=idle_green
+[send] thinking     event=UserPromptSubmit effect=working_yellow
+[keep] thinking     event=UserPromptSubmit effect=working_yellow
+[send] wait_confirm event=PermissionRequest effect=wait_user
+[keep] wait_confirm event=PermissionRequest effect=wait_user
+[send] error        event=StopFailure effect=error_red
+[keep] error        event=StopFailure effect=error_red
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+串口桥已在运行，当前进程退出。

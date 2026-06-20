@@ -47,6 +47,36 @@ function claudeHookCommand() {
   return `sh "${hookEntryAbs}" claude`;
 }
 
+function cursorHookCommand() {
+  return `${hookEntryRel} cursor`;
+}
+
+function cursorGlobalHookCommand() {
+  if (isWindows) {
+    return `cmd /c ""${hookEntryAbs}" cursor"`;
+  }
+  return `sh "${hookEntryAbs}" cursor`;
+}
+
+function buildCursorHooksConfig(command) {
+  const entry = { command, timeout: 5 };
+  return {
+    version: 1,
+    hooks: {
+      sessionStart: [entry],
+      sessionEnd: [entry],
+      beforeSubmitPrompt: [entry],
+      preToolUse: [entry],
+      postToolUse: [entry],
+      postToolUseFailure: [entry],
+      subagentStart: [entry],
+      subagentStop: [entry],
+      preCompact: [entry],
+      stop: [entry]
+    }
+  };
+}
+
 function buildCodexHookConfig(command) {
   const hook = {
     type: "command",
@@ -170,6 +200,54 @@ function installClaudeHooks() {
   console.log(`merged Claude hooks -> ${claudeSettingsPath}`);
 }
 
+function isSignalLightCursorHook(entry) {
+  try {
+    const command = String(entry?.command || "");
+    return command.includes("agent-signal-light-web") && (command.includes("hook.cmd") || command.includes("hook.sh"));
+  } catch {
+    return false;
+  }
+}
+
+function mergeCursorHooks(filePath, commandFactory, label) {
+  ensureDir(path.dirname(filePath));
+  const current = readJson(filePath, {});
+  const next = typeof current === "object" && current !== null ? current : {};
+  const hooksRoot = typeof next.hooks === "object" && next.hooks !== null ? next.hooks : {};
+  const ours = buildCursorHooksConfig(commandFactory()).hooks;
+
+  for (const [eventName, entries] of Object.entries(ours)) {
+    const existing = Array.isArray(hooksRoot[eventName]) ? hooksRoot[eventName] : [];
+    const kept = existing.filter((entry) => !isSignalLightCursorHook(entry));
+    hooksRoot[eventName] = [...kept, ...entries];
+  }
+
+  next.version = 1;
+  next.hooks = hooksRoot;
+  writeJson(filePath, next);
+  console.log(`${label} -> ${filePath}`);
+}
+
+function installCursorHooks() {
+  const workspaceCursorDir = path.join(workspaceRoot, ".cursor");
+  mergeCursorHooks(
+    path.join(workspaceCursorDir, "hooks.json"),
+    cursorHookCommand,
+    "wrote Cursor hooks"
+  );
+}
+
+function installUserCursorHooks() {
+  const userCursorDir = path.join(process.env.USERPROFILE || process.env.HOME || "", ".cursor");
+  mergeCursorHooks(
+    path.join(userCursorDir, "hooks.json"),
+    cursorGlobalHookCommand,
+    "merged user Cursor hooks"
+  );
+}
+
 installCodexHooks();
 installUserCodexHooks();
 installClaudeHooks();
+installCursorHooks();
+installUserCursorHooks();

@@ -16,7 +16,24 @@ const MAX_LOG_ITEMS = 60;
 
 const LED_MODES = { off: 0, on: 1, breathe: 2 };
 const MODE_NAMES = ["off", "on", "breathe"];
-const AGENT_SCOPES = new Set(["all", "claude", "codex"]);
+const AGENT_SCOPES = new Set(["all", "claude", "codex", "cursor"]);
+const CURSOR_EVENT_MAP = {
+  sessionstart: "SessionStart",
+  sessionend: "SessionEnd",
+  beforesubmitprompt: "UserPromptSubmit",
+  userpromptsubmit: "UserPromptSubmit",
+  pretooluse: "PreToolUse",
+  posttooluse: "PostToolUse",
+  posttoolusefailure: "StopFailure",
+  subagentstart: "SubagentStart",
+  subagentstop: "SubagentStop",
+  precompact: "PreCompact",
+  postcompact: "PostCompact",
+  stop: "Stop",
+  stopfailure: "StopFailure",
+  permissionrequest: "PermissionRequest",
+  notification: "Notification",
+};
 const CODEX_ONLY_EVENTS = new Set(["PermissionRequest", "PreCompact", "PostCompact", "SubagentStart", "SubagentStop"]);
 const CLAUDE_ONLY_EVENTS = new Set(["Elicitation", "StopFailure"]);
 const DEVICE_STATUS_PRIORITY = {
@@ -293,6 +310,7 @@ function detectAgent(data, event, urlObj) {
     const text = String(raw || "").toLowerCase();
     if (text.includes("codex")) return "codex";
     if (text.includes("claude")) return "claude";
+    if (text.includes("cursor")) return "cursor";
   }
   if (CODEX_ONLY_EVENTS.has(event)) return "codex";
   if (CLAUDE_ONLY_EVENTS.has(event)) return "claude";
@@ -305,13 +323,21 @@ function hookEventName(data) {
     data.event,
     data.event_name,
     data.hook,
-    data.type
+    data.type,
+    data.hookEventName
   ];
   for (const value of candidates) {
     const text = String(value || "").trim();
     if (text) return text;
   }
   return "";
+}
+
+function normalizeHookEvent(event) {
+  const text = String(event || "").trim();
+  if (!text) return "";
+  const mapped = CURSOR_EVENT_MAP[text.toLowerCase()];
+  return mapped || text;
 }
 
 function hookSessionId(data, agent) {
@@ -476,11 +502,11 @@ function statusPayload() {
         };
       })();
   const agentCounts = sessions.reduce((acc, session) => {
-    if (session.agent === "codex" || session.agent === "claude") {
+    if (session.agent === "codex" || session.agent === "claude" || session.agent === "cursor") {
       acc[session.agent] += 1;
     }
     return acc;
-  }, { codex: 0, claude: 0 });
+  }, { codex: 0, claude: 0, cursor: 0 });
   return {
     ok: true,
     agent_filter: agentFilter,
@@ -548,7 +574,7 @@ async function handleHook(req, res, urlObj) {
   }
 
   const sid = String(data.session_id || "").trim();
-  const event = hookEventName(data);
+  const event = normalizeHookEvent(hookEventName(data));
   const cwd = data.cwd ? String(data.cwd) : null;
   const agent = detectAgent(data, event, urlObj);
   const resolvedSid = hookSessionId(data, agent);
@@ -627,7 +653,7 @@ async function handleAgentFilter(req, res) {
     return;
   }
   if (!AGENT_SCOPES.has(nextScope)) {
-    sendJson(res, 400, { ok: false, error: "scope must be all, claude, or codex" });
+    sendJson(res, 400, { ok: false, error: "scope must be all, claude, codex, or cursor" });
     return;
   }
   agentFilter = nextScope;

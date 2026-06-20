@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": "./agent-signal-light-web/hook.sh cursor",
+        "timeout": 5
+      }
+    ],
+    "sessionEnd": [
+      {
+        "command": "./agent-signal-light-web/hook.sh cursor",
+        "timeout": 5
+      }
+    ],
+    "beforeSubmitPrompt": [
+      {
+        "command": "./agent-signal-light-web/hook.sh cursor",
+        "timeout": 5
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "./agent-signal-light-web/hook.sh cursor",
+        "timeout": 5
+      }
+    ],
+    "postToolUse": [
+      {
+        "command": "./agent-signal-light-web/hook.sh cursor",
+        "timeout": 5
+      }
+    ],
+    "postToolUseFailure": [
+      {
+        "command": "./agent-signal-light-web/hook.sh cursor",
+        "timeout": 5
+      }
+    ],
+    "subagentStart": [
+      {
+        "command": "./agent-signal-light-web/hook.sh cursor",
+        "timeout": 5
+      }
+    ],
+    "subagentStop": [
+      {
+        "command": "./agent-signal-light-web/hook.sh cursor",
+        "timeout": 5
+      }
+    ],
+    "preCompact": [
+      {
+        "command": "./agent-signal-light-web/hook.sh cursor",
+        "timeout": 5
+      }
+    ],
+    "stop": [
+      {
+        "command": "./agent-signal-light-web/hook.sh cursor",
+        "timeout": 5
+      }
+    ]
+  }
+}
