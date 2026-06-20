@@ -24,7 +24,7 @@ const CURSOR_EVENT_MAP = {
   userpromptsubmit: "UserPromptSubmit",
   pretooluse: "PreToolUse",
   posttooluse: "PostToolUse",
-  posttoolusefailure: "StopFailure",
+  posttoolusefailure: "PostToolUseFailure",
   subagentstart: "SubagentStart",
   subagentstop: "SubagentStop",
   precompact: "PreCompact",
@@ -51,7 +51,7 @@ const CLAUDE_EVENT_TO_STATUS = {
   UserPromptSubmit: "thinking",
   PreToolUse: "busy",
   PostToolUse: "ai",
-  PostToolUseFailure: "error",
+  PostToolUseFailure: "busy",
   PreCompact: "ai",
   SubagentStart: "ai",
   SubagentStop: "ai",
@@ -367,7 +367,7 @@ function deriveDeviceStatus(event, effectId, agent) {
     return CLAUDE_EVENT_TO_STATUS[eventText];
   }
 
-  if (eventText === "StopFailure" || effectText === "error_red" || normalized.includes("posttoolusefailure")) {
+  if (eventText === "StopFailure" || effectText === "error_red") {
     return "error";
   }
   if (
@@ -384,7 +384,7 @@ function deriveDeviceStatus(event, effectId, agent) {
   if (eventText === "Stop" || effectText === "success") {
     return "success";
   }
-  if (eventText === "PreToolUse" || eventText === "PostToolUse" || eventText === "busy") {
+  if (eventText === "PreToolUse" || eventText === "PostToolUse" || eventText === "PostToolUseFailure" || eventText === "busy") {
     return "busy";
   }
   if (
@@ -454,6 +454,18 @@ function bindingKeyFor(data, event, agent) {
   return candidates.find((key) => configStore.effectForEvent(key)) || null;
 }
 
+function aggregateFromSession(session) {
+  const effectId = effectIdForDeviceStatus(session.device_status);
+  return {
+    effect_id: effectId,
+    effect_name: effectId,
+    leds: (configStore.getEffect(effectId)?.frames?.[0]?.leds) || ["off", "off", "off"],
+    agent: session.agent,
+    winner_event: session.event,
+    device_status: session.device_status
+  };
+}
+
 function statusPayload() {
   const sessions = sessionStore.snapshot();
   const visibleSessions = sessions.filter((session) => agentFilter === "all" || session.agent === agentFilter);
@@ -461,16 +473,13 @@ function statusPayload() {
     selectedSessionId
       ? visibleSessions.find((session) => session.sid === selectedSessionId) || null
       : null;
+  const manualSession = visibleSessions.find((session) => session.sid === MANUAL_SID) || null;
+  const controllingSession = selectedSession || manualSession;
   const aggregate = selectedSession
-    ? {
-        effect_id: effectIdForDeviceStatus(selectedSession.device_status),
-        effect_name: effectIdForDeviceStatus(selectedSession.device_status),
-        leds: (configStore.getEffect(effectIdForDeviceStatus(selectedSession.device_status))?.frames?.[0]?.leds) || ["off", "off", "off"],
-        agent: selectedSession.agent,
-        winner_event: selectedSession.event,
-        device_status: selectedSession.device_status
-      }
-    : (() => {
+    ? aggregateFromSession(selectedSession)
+    : manualSession
+      ? aggregateFromSession(manualSession)
+      : (() => {
         const winner = visibleSessions.reduce((best, current) => {
           if (!best) return current;
           const bestPriority = DEVICE_STATUS_PRIORITY[best.device_status] ?? -1;
@@ -491,15 +500,7 @@ function statusPayload() {
           };
         }
 
-        const effectId = effectIdForDeviceStatus(winner.device_status);
-        return {
-          effect_id: effectId,
-          effect_name: effectId,
-          leds: (configStore.getEffect(effectId)?.frames?.[0]?.leds) || ["off", "off", "off"],
-          agent: winner.agent,
-          winner_event: winner.event,
-          device_status: winner.device_status
-        };
+        return aggregateFromSession(winner);
       })();
   const agentCounts = sessions.reduce((acc, session) => {
     if (session.agent === "codex" || session.agent === "claude" || session.agent === "cursor") {
@@ -511,7 +512,7 @@ function statusPayload() {
     ok: true,
     agent_filter: agentFilter,
     selected_session_id: selectedSessionId || "",
-    controlling_session_id: selectedSession ? selectedSession.sid : "",
+    controlling_session_id: controllingSession ? controllingSession.sid : "",
     selected_session_missing: Boolean(selectedSessionId) && !selectedSession,
     ...aggregate,
     led_codes: aggregate.leds.map((mode) => LED_MODES[mode]),
