@@ -968,3 +968,4 @@
 目标设备 ID: agent-signal-light-v1
 已连接 /dev/cu.usbmodem2101（agent-signal-light-v1），波特率 115200
 [send] busy         event=PreToolUse effect=working_yellow
+串口桥已在运行，当前进程退出。

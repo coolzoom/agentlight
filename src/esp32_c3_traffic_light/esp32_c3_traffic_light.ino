@@ -94,10 +94,6 @@ uint8_t brightnessToDuty(uint8_t brightness) {
 #if LED_ACTIVE_HIGH
   return limited;
 #else
-  // brightness=0 时若写 255，ESP32 Arduino 会把 duty=max 转成 LEDC 100% 全功率输出，三灯会全亮
-  if (limited == 0) {
-    return LED_PWM_MAX - 1;
-  }
   return LED_PWM_MAX - limited;
 #endif
 }
@@ -124,7 +120,7 @@ void stopLedPwmOff(uint8_t pin) {
 }
 
 void writeLedPin(uint8_t pin, uint8_t brightness) {
-  if (brightness == 0 && currentState == STATE_OFF) {
+  if (brightness == 0) {
     stopLedPwmOff(pin);
     return;
   }
