@@ -2,9 +2,9 @@
   ESP32-C3 Codex 三色红绿灯控制程序
 
   硬件连接：
-  - 红灯：GPIO20
+  - 红灯：GPIO0
   - 黄灯：GPIO2
-  - 绿灯：GPIO21
+  - 绿灯：GPIO1
 
   串口协议：
   以 115200 波特率发送一行字符串，支持：
@@ -41,9 +41,9 @@
 #define GREEN_LED_PIN 20
 
 // 每个灯独立使用一个 PWM 通道，限制最大占空比以降低 GPIO 电流。
-const uint8_t RED_LED_CHANNEL = 20;
-const uint8_t YELLOW_LED_CHANNEL = 2;
-const uint8_t GREEN_LED_CHANNEL = 21;
+const uint8_t RED_LED_CHANNEL = 0;
+const uint8_t YELLOW_LED_CHANNEL = 1;
+const uint8_t GREEN_LED_CHANNEL = 2;
 
 const uint32_t LED_PWM_FREQ = 1000;
 const uint8_t LED_PWM_RESOLUTION = 8;
