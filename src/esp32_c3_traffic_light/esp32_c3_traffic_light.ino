@@ -93,10 +93,6 @@ uint8_t brightnessToDuty(uint8_t brightness) {
 #if LED_ACTIVE_HIGH
   return limited;
 #else
-  // brightness=0 时若写 255，ESP32 Arduino 会把 duty=max 转成 LEDC 100% 全功率输出，三灯会全亮
-  if (limited == 0) {
-    return LED_PWM_MAX - 1;
-  }
   return LED_PWM_MAX - limited;
 #endif
 }
@@ -154,9 +150,7 @@ bool setStatus(String status) {
   } else if (status == "busy" || status == "running") {
     enterState(STATE_BUSY);
   } else if (status == "success" || status == "done") {
-    if (currentState != STATE_SUCCESS) {
-      enterState(STATE_SUCCESS);
-    }
+    enterState(STATE_SUCCESS);
   } else if (status == "wait_confirm") {
     enterState(STATE_WAIT_CONFIRM);
   } else if (status == "confirm") {
@@ -378,7 +372,6 @@ void updateEffect() {
       setLightLevels(0, 0, LED_PWM_LIMIT);
       if (millis() - stateStartMs >= SUCCESS_HOLD_MS) {
         enterState(STATE_IDLE);
-        Serial.println("State changed to: idle");
       }
       break;
 

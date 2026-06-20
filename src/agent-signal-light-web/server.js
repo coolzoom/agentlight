@@ -12,7 +12,6 @@ const DEFAULT_CONFIG_PATH = path.join(APP_DIR, "config.default.json");
 const CONFIG_PATH = path.join(DATA_DIR, "config.json");
 const MANUAL_SID = "__manual__";
 const SESSION_TTL_MS = 3 * 60 * 1000;
-const SUCCESS_HOLD_MS = 5000;
 const MAX_LOG_ITEMS = 60;
 
 const LED_MODES = { off: 0, on: 1, breathe: 2 };
@@ -207,16 +206,10 @@ class SessionStore {
 
   sweep() {
     const cutoff = Date.now() - SESSION_TTL_MS;
-    const now = Date.now();
     let changed = false;
     for (const [sid, entry] of this.sessions.entries()) {
       if (entry.lastSeen < cutoff) {
         this.sessions.delete(sid);
-        changed = true;
-        continue;
-      }
-      if (entry.event === "Stop" && now - entry.lastSeen >= SUCCESS_HOLD_MS) {
-        entry.event = "SessionStart";
         changed = true;
       }
     }
