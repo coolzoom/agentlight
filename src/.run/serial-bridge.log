@@ -1,0 +1,326 @@
+正在监听 http://127.0.0.1:8787/api/status
+已连接 /dev/cu.usbmodem2101，波特率 115200
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+串口桥已在运行，当前进程退出。
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[warn] 无法访问状态接口: <urlopen error [Errno 61] Connection refused>
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+正在监听 http://127.0.0.1:8787/api/status
+已连接 /dev/cu.usbmodem2101，波特率 115200
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
+[send] off          event=off effect=off
+[keep] off          event=off effect=off
+[keep] off          event=off effect=off
