@@ -15,7 +15,7 @@
 
 点击下方封面图或链接，在 GitHub 文件页 / 浏览器中打开视频（GitHub 文件页右上角有下载按钮，也可右键「另存为」）：
 
-[![点击观看演示视频 — Agent Light 工作状态灯](bom_image/trafficlight.png)](https://github.com/coolzoom/agentlight/blob/master/bom_image/agent%20light.MP4)
+[![点击观看演示视频 — Agent Light 工作状态灯](bom_image/demo.webp)](https://github.com/coolzoom/agentlight/blob/master/bom_image/agent%20light.MP4)
 
 | 观看方式 | 链接 |
 |----------|------|
